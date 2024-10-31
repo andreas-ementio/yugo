@@ -108,6 +108,9 @@ defmodule Yugo.Client do
     do:
       [
         server_name_indication: server,
+        customize_hostname_check: [
+          match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
+        ],
         verify: ssl_verify,
         cacerts: :public_key.cacerts_get()
       ] ++ @common_connect_opts
